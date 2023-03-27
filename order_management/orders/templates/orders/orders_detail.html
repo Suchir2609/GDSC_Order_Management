@@ -1,0 +1,25 @@
+{% extends "orders/base.html" %}
+{% block content %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ object.orderer }}</a>
+        <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+        {% if object.orderer == user %}
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'orders-update' object.id%}">Update</a>
+          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'orders-delete' object.id%}">Delete</a>
+        {% endif %}
+      </div>
+      <div id="favourite-section">
+        <a href="{% url 'favourite-add' object.id %}">
+          <i class="btn btn-secondary btn-sm mt-1 mb-1">favourite</i>
+        </a>
+      </div>
+      <h2><a class="article-title" href="#">{{ object.title }}</a></h2>
+      <p class="article-content">{{ object.content }}</p>
+      {% for tag in object.tags.all %}
+           <p> {{tag.name}}</p>
+      {% endfor %}
+    </div>
+  </article>
+{% endblock content %}

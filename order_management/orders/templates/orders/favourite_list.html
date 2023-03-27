@@ -1,0 +1,16 @@
+{% extends 'orders/base.html'%}
+{% block content%}
+{% for order in new %}
+     <article class="media content-section">
+       <div class="media-body">
+         <div class="article-metadata">
+           <a class="mr-2" href="{% url 'profile'%}">{{ order.orderer }}</a>
+           <small class="text-muted">{{ order.date_posted|date:"F d, Y" }}</small>
+         </div>
+         <h2><a class="article-title" href="{% url 'orders-detail' order.id %}">{{ order.title }}</a></h2>
+         <p class="article-content">{{ order.content }}</p>
+       </div>
+       </div>
+     </article>
+   {% endfor %}
+{% endblock %}
